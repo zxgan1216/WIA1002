@@ -3,9 +3,12 @@ package L2;
 public class L2Q6 {
     public static void main(String[] args) {
         Integer[][] int2DArr = {{4,1},{5,2},{6,3}};
+        String[][] strings={{"RED","BLUE"},{"YELLOW","HALO"}};
         minMaxTwoDArray minmax=new minMaxTwoDArray();
         System.out.println("Min ="+minmax.min(int2DArr));
         System.out.println("Max ="+minmax.max(int2DArr));
+        System.out.println("Min ="+minmax.min(strings));
+        System.out.println("Max ="+minmax.max(strings));
     }
 }
 
