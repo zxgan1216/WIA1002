@@ -5,30 +5,43 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class L1Q2 {
-    public static void main(String[] args) throws IOException {
-        data[] data=new data[1];
-        Scanner sc=new Scanner(System.in);
-        for(int i=0;i<data.length;i++){
-            int num_char=0;
-            System.out.println("Enter the file name");
-            String name=sc.nextLine();
-            System.out.println("Enter the separate character");
-            String character= sc.nextLine();
-
-            data[i]=new data(name,character);
-            Scanner scanner=new Scanner(new FileInputStream(data[i].file));
-            while (scanner.hasNextLine()){
-                String line1=scanner.nextLine();
-                String[] line2=line1.split(data[i].character_sep);
-                for (String line:line2){
-                    System.out.print(line);
-                    num_char++;
-                }
-                System.out.println();
+    public static void main(String[] args) {
+        String fileName = "";
+        String pattern = "";
+        for(int i = 1 ; i<=4 ; i++){
+            System.out.println();
+            fileName = String.format("/Users/zxgan/eclipse-workspace/WIA1002/src/L1/text%d.txt",i);
+            switch(i){
+                case 1 -> pattern = ",";
+                case 2 -> pattern = ", ";
+                case 3 -> pattern = "; ";
+                case 4 -> pattern = "\\d+";
             }
-            System.out.println("num char ="+num_char);
-        }
 
+            try{
+                Scanner sc = new Scanner(new FileInputStream(fileName));
+                String finalLine = "";
+                int charCount = 0;
+                while(sc.hasNextLine()){
+                    String line = sc.nextLine();
+                    if(i<=3){
+                        String[] words = line.split(pattern);
+                        finalLine = String.join("", words);
+                    }
+                    else{
+                        finalLine = line.replaceAll(pattern , "");
+                    }
+
+                    charCount += finalLine.length();
+                    System.out.println(finalLine);
+                }
+                System.out.println("Total number of characters: " + charCount);
+                sc.close();
+
+            }catch(FileNotFoundException e){
+                System.out.println("File not found");
+            }
+        }
     }
 }
 
